@@ -59,7 +59,7 @@ class Store {
 		//Find All the Occurences of The Term
 		for(var i = 0 ; i < Length ; i++){
 			var element = this.albumData[i];
-			if (element.description && element.description.indexOf(term) >= 0){
+			if (element.description && element.description.toLowerCase().indexOf(term) >= 0){
 				searchedImages.push(element);
 			}
 		}
