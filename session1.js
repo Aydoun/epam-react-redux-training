@@ -90,6 +90,4 @@ class Store {
 	}
 }
 
-var album = new Store();
-album.addImage({})
-console.log(album.getAll())
+module.exports = Store;
