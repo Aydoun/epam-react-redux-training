@@ -1,8 +1,24 @@
-var log = console.log;
+/**
+ * JavaScript Advanced React/Redux Training
+ * @file Advanced JavaScript Home Assigment
+ * @author Mohamed Amine Aydoun <aydoun@qq.com>
+ * @version 0.1
+ */
+class Store {
+   
+    /**
+     * Create a fresh Album.
+     */
+    constructor() {
+        this.albumData = [];
+    }
 
-var Store = {
-	albumData : [],
-	addImage: function(image){
+    /**
+   * Add New Photo to The Collection.
+   * @param {Object} image - photo Data
+   */
+
+	addImage(image){
 		if (image == null) {
 			throw new ReferenceError('Can\'t add a null to the collection');
 		}
@@ -11,18 +27,32 @@ var Store = {
 			image.id = new Date().valueOf();
 		}
 		this.albumData.push(image);
-	},
-	getImageById: function(id) {
+	}
+	/**
+   * Select Image By Id.
+   * @param {Number} id - Photo id
+   * @return {Object} returns The desired object , undefined otherwise
+   */
+	getImageById(id) {
 		return this.albumData.find(function(element){
 			return id === element.id;
 		});
-	},
-	removeById: function(id) {
+	}
+	/**
+   * Remove Photo By Id
+   * @param {Number} id - Photo Id
+   */
+	removeById(id) {
 		this.albumData = this.albumData.filter(function(element){
 			return id !== element.id;
 		});
-	},
-	findByTerm: function(term){
+	}
+	/**
+   * Search The Photo Album By Description.
+   * @param {string} term - The Search Term
+   * @return {Array} All The Matched Records
+   */
+	findByTerm(term){
 		var searchedImages = [];
 		var Length = this.albumData.length;
 
@@ -35,8 +65,13 @@ var Store = {
 		}
 
 		return searchedImages;
-	},
-	edit: function(image){
+	}
+	/**
+   * Photo Album Edit Record.
+   * @param {Object} image - Override the exiting image with new data
+   * @return {Boolean} Update Success Flag
+   */
+	edit(image){
 		if (image && image.id){
 			var imageToEdit = this.getImageById(image.id);
 			if (imageToEdit) {
@@ -45,22 +80,16 @@ var Store = {
 			}
 		}
 
-		return null;
-	},
-	getAll: function(){
+		return false;
+	}
+	/**
+   * @return {Array} All The Photo Collection
+   */
+	getAll(){
 		return this.albumData;
 	}
 }
 
-var store1 = Object.create(Store);
-
-store1.addImage({});
-
-store1.addImage({
-	id : 1,
-	url: 'http://there23.com',
-	description: 'im tired of this shit'
-});
-
-log(store1.getImageById(1), 'number 1');
-
+var album = new Store();
+album.addImage({})
+console.log(album.getAll())
