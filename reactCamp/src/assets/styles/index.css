@@ -5,9 +5,9 @@ body {
 }
 
 #container {
-	max-width: 860px;
-	margin:10px auto;
-	background:#fff;
+	max-width: 760px;
+	margin: 42px auto;
+	background: #fff;
 }
 
 #header {
@@ -23,4 +23,21 @@ body {
 
 p{
 	color:green;
+}
+
+.photo-container{
+	padding:10px;
+	border : 1px solid #ccc;
+	float:left;
+	margin-right:10px;
+}
+
+.photo-description{
+	margin-top: 8px;
+	font-size: 15px;
+	color: rgb(34, 34, 34);
+}
+
+.photo-content{
+	outline: none;
 }

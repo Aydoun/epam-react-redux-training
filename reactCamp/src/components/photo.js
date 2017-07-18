@@ -6,9 +6,11 @@ const Photo = (props) => {
   return (
     <div className="photo-container">
     	<div className="photo-content">
-    		<img src={props.url || ''}
+    		<img src={props.url || defaultUrl} />
     	</div>
-    	<span>{props.defaultUrl}</span>
+    	<div className="photo-description">
+    		<span>{props.description}</span>
+    	</div>
     </div>
   );
 };
