@@ -52,11 +52,11 @@ class Store {
 	*/
 	findByTerm(term){
 		var searchedImages = [];
-		var Length = this.albumData.length;
+		const Length = this.albumData.length;
 
 		//Find All the Occurences of The Term
-		for(var i = 0 ; i < Length ; i++){
-			var element = this.albumData[i];
+		for(let i = 0 ; i < Length ; i++){
+			let element = this.albumData[i];
 			if (element.description && element.description.toLowerCase().indexOf(term) >= 0){
 				searchedImages.push(element);
 			}

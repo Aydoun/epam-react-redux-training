@@ -1,0 +1,26 @@
+body {
+	background: #f6f6f6;;
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	max-width: 860px;
+	margin:10px auto;
+	background:#fff;
+}
+
+#header {
+	background: #49b4ef;
+	color: white;
+	font-size: 16px;
+	height: 53px;
+	line-height: 50px;
+	font-weight: bold;
+	border-radius: 3px;
+	text-align: center;
+}
+
+p{
+	color:green;
+}
