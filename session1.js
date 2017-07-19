@@ -64,7 +64,7 @@ class Store {
 	* @return {Array} All The Matched Records
 	*/
 	findByTerm(term){
-		var searchedImages = [];
+		const searchedImages = [];
 		const Length = this.albumData.length;
 
 		//Find All the Occurences of The Term
@@ -83,15 +83,17 @@ class Store {
 	* @return {Boolean} Update Success Flag
 	*/
 	edit(image){
-		if (image && image.id){
-			var imageToEdit = this.getImageById(image.id);
-			if (imageToEdit) {
-				Object.assign(imageToEdit , image);
-				return true;
-			}
+		if (image === null || typeof image === 'undefined' || !image.id) {
+			throw new Error('Image Format is not Acceptable');
+		}
+		
+		let imageToEdit = this.getImageById(image.id);
+		if (typeof imageToEdit === 'undefined') {
+			throw new Error('Image Not Found');
 		}
 
-		return false;
+		Object.assign(imageToEdit , image);		
+		return true;
 	}
 	/**
 	* @return {Array} All The Photo Collection
