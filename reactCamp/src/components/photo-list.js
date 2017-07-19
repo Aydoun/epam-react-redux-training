@@ -32,8 +32,8 @@ const PhotoList = (props) => {
   return (
     <div>
     	{
-            photoData.map((photo) => <Photo {...photo} />) 
-        }
+        photoData.map((photo) => <Photo {...photo} />) 
+      }
     </div>
   );
 };

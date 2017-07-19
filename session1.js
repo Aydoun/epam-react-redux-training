@@ -11,20 +11,34 @@ class Store {
 	*/
 	constructor() {
 		this.albumData = [];
+		this.currentIndex = 0;
 	}
 	/**
 	* Add New Photo to The Collection.
 	* @param {Object} image - photo Data
 	*/
-	addImage(image) {
-		if (image === null) {
+	addImage(images) {
+		if (images === null) {
 			throw new ReferenceError('Can\'t add a null to the collection');
 		}
-		if (!image.id) {
-			//Creating a unique id for the new image
-			image.id = new Date().valueOf();
-		}
-		this.albumData.push(image);
+
+		if (Array.isArray(images)) {
+			images.forEach((image) => {
+				image.id = image.id || this.getId();
+			})
+			this.albumData = [...this.albumData , ...images];
+		} else {
+			image.id = image.id || this.getId();
+			this.albumData.push(image);
+		}	
+	}
+	/**
+	* Helper Function Generating Incremental Ids
+	*/
+	getId() {
+		this.currentIndex = this.currentIndex + 1;
+
+		return this.currentIndex;
 	}
 	/**
 	* Select Image By Id.
@@ -41,9 +55,8 @@ class Store {
 	* @param {Number} id - Photo Id
 	*/
 	removeById(id) {
-		this.albumData = this.albumData.filter(function(element){
-			return id !== element.id;
-		});
+		const index = this.albumData.findIndex((ele) => ele.id === id);
+		return this.albumData.splice(index , 1);
 	}
 	/**
 	* Search The Photo Album By Description.
