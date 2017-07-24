@@ -3,18 +3,12 @@ import React, { Component } from 'react';
 class Likes extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      likes: props.initial
-    };
   }
 
   onLikesClicked() {
-    this.setState((prevState) => {
-      const likes = prevState.likes + 1;
-      this.props.onChange(likes);
-
-      return { likes };
-    });
+    if (this.props.onChange) {
+      this.props.onChange();
+    }
   }
 
   render() {
@@ -22,7 +16,7 @@ class Likes extends Component {
       <div>
         <a href="#" onClick={this.onLikesClicked.bind(this)}> like </a>
         <span>
-        { this.state.likes || '' }
+        { this.props.likesNumber || '' }
         </span>
       </div>  
     );
