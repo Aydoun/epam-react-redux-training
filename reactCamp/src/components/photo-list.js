@@ -18,12 +18,32 @@ export default class PhotoList extends React.Component{
     });
   }
 
+  onDelete(id) {
+    this.store.removeById(id)
+    .then(() => {
+      this.setState({
+        photoData: this.store.getAll()
+      });
+    });
+  }
+
+  onAddLike(id){
+
+    this.store.addLike(id)
+    .then(() => {
+        this.setState({
+          photoData: this.store.getAll()
+        });
+    });
+  }
+
   render(){
-    console.log(this.state.photoData)
     return (
       <div>
       {
-        this.state.photoData.map((photo, index) => <Photo key={index} {...photo} />) 
+        this.state.photoData.map((photo, index) => <Photo 
+          onAddLike={this.onAddLike.bind(this)}
+          onDelete={this.onDelete.bind(this)} key={index} {...photo} />) 
       }
       </div>  
     )

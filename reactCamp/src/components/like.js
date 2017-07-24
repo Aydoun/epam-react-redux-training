@@ -14,7 +14,7 @@ class Likes extends Component {
   render() {
     return (
       <div>
-        <a href="#" onClick={this.onLikesClicked.bind(this)}> like </a>
+        <a href="javascript:void(0)" onClick={this.onLikesClicked.bind(this)}> like </a>
         <span>
         { this.props.likesNumber || '' }
         </span>

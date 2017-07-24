@@ -78,7 +78,6 @@ export default class Store {
       }
 
       this.albumData[index] = image;
-      console.log('before Resolving')
       resolve();
     });
   }
@@ -88,9 +87,6 @@ export default class Store {
   */
   getLikesById(imagesId) {
     const image = this.getImageById(imagesId);
-
-    console.log(image.likes , 'likes')
-
     return image.likes;
   }
   /**
@@ -115,8 +111,11 @@ export default class Store {
   * @param {Number} id - Photo Id
   */
   removeById(id) {
-    const index = this.albumData.findIndex((ele) => ele.id === id);
-    return this.albumData.splice(index , 1);
+    return new Promise((resolve, reject) => {
+      const index = this.albumData.findIndex((ele) => ele.id === id);
+      const removedElement = this.albumData.splice(index , 1);
+      resolve(removedElement);
+    });
   }
   /**
   * Search The Photo Album By Description.

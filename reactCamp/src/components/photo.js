@@ -8,27 +8,16 @@ export default class Photo extends React.Component {
 
     constructor(props){
         super(props);
-
-        this.state = {
-            likesNumber : this.props.likes
-        }
-        this.store = new Store();
     }
 
     addListToStore(){
         const {id} = this.props;
-
-        this.store.addLike(id)
-        .then(() => {
-            this.setState({
-                likesNumber: this.store.getLikesById(id)
-            })
-        });
+        this.props.onAddLike(id);
     }
 
     render(){
         const {id, url, description} = this.props;
-        console.log(this.state.likesNumber , 'state like')
+    
         return (
             <div className="photo-container">
                 <div className="photo-content">
@@ -36,11 +25,11 @@ export default class Photo extends React.Component {
                     <div className="photo-description">
                         <span>{description}</span>
                         <Likes
-                          likesNumber={this.state.likesNumber}
+                          likesNumber={this.props.likes}
                           onChange={this.addListToStore.bind(this) } 
                         />
                         <div>
-                          <a href="#" onClick={() => {console.log(`${id } deleted`)}}> delete </a>
+                          <a href="javascript:void(0)" onClick={() => this.props.onDelete(id)}> delete </a>
                         </div>
                     </div>
                 </div>
