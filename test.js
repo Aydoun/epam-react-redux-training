@@ -1,6 +1,6 @@
-var Store = require('./session1');
+const Store = require('./session1');
 
-var store1 = new Store();
+let store1 = new Store();
 
 describe("Store Testing Suit", function() {
   const mocks = [
@@ -31,7 +31,7 @@ describe("Store Testing Suit", function() {
   });
 
   it("Album Store Data Correctness", function() {
-  	var addedImage = store1.getImageById(1);
+  	const addedImage = store1.getImageById(1);
   	expect(addedImage).not.toBe(undefined);
     expect(addedImage.key).toBe('jxas');
   });
@@ -49,7 +49,7 @@ describe("Store Testing Suit", function() {
   		url : 'http://somewebsite.com/cat.jpg',
   	});
 
-  	var editedImage = store1.getImageById(1);
+  	const editedImage = store1.getImageById(1);
   	expect(store1.getAll().length).toBe(3);
   	expect(editedImage.key).toBe('kowx');
   	expect(store1.findByTerm('cat').length).toBe(1);

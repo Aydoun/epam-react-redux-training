@@ -24,11 +24,12 @@ class Store {
 
 		if (Array.isArray(images)) {
 			images.forEach((image) => {
-				image.id = image.id || this.getId();
-			})
+				image.id = this.getId();
+			});
+			
 			this.albumData = [...this.albumData , ...images];
 		} else {
-			image.id = image.id || this.getId();
+			image.id = this.getId();
 			this.albumData.push(image);
 		}	
 	}
@@ -37,7 +38,6 @@ class Store {
 	*/
 	getId() {
 		this.currentIndex = this.currentIndex + 1;
-
 		return this.currentIndex;
 	}
 	/**
