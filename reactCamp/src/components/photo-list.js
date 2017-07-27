@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Photo from './photo';
 import Store from '../services';
+import { Grid, Image, Card } from 'semantic-ui-react'
 
-export default class PhotoList extends React.Component{
+export default class PhotoList extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -12,7 +13,6 @@ export default class PhotoList extends React.Component{
   }
 
   componentDidMount(){
-    
     this.setState({
       photoData : this.store.getAll()
     });
@@ -28,7 +28,6 @@ export default class PhotoList extends React.Component{
   }
 
   onAddLike(id){
-
     this.store.addLike(id)
     .then(() => {
         this.setState({
@@ -38,14 +37,20 @@ export default class PhotoList extends React.Component{
   }
 
   render(){
+    const { photoData } = this.state;
     return (
-      <div>
-      {
-        this.state.photoData.map((photo, index) => <Photo 
-          onAddLike={this.onAddLike.bind(this)}
-          onDelete={this.onDelete.bind(this)} key={index} {...photo} />) 
-      }
-      </div>  
+      <Card.Group>
+        {
+          photoData.map((photo, index) =>
+            <Photo
+              key={index}
+              {...photo}
+              onAddLike={() => this.onAddLike(photo.id)}
+              onDelete={() => this.onDelete(photo.id)}
+            />
+          )
+        }
+      </Card.Group>
     )
   }
 }

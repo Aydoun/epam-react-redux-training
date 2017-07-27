@@ -1,8 +1,14 @@
 import React from 'react';
-import Likes from './like';
 import Store from '../services';
+import { Grid, Image, Card, Button, Icon } from 'semantic-ui-react';
 
-const defaultUrl = 'http://tse1.mm.bing.net/th?id=OIP.VD1t7q80cGkoTktQo4LEPQEsCo&w=289&h=162&c=7&qlt=90&o=4&pid=1.7';
+
+const extra = (
+  <a>
+    <Icon name='user' />
+    16 Friends
+  </a>
+)
 
 export default class Photo extends React.Component {
 
@@ -10,30 +16,32 @@ export default class Photo extends React.Component {
         super(props);
     }
 
-    addListToStore(){
+    addLikeToStore(){
         const {id} = this.props;
         this.props.onAddLike(id);
     }
 
     render(){
-        const {id, url, description} = this.props;
-    
+        const {id, url, description, likes} = this.props;
+        const extra = (
+          <div>
+            <span className="side-margin">
+              <Icon name='like' onClick={() => this.props.onAddLike(id)} />
+              {likes || 0} likes
+            </span>
+            <span className="side-margin danger-marker" onClick={() => this.props.onDelete(id)}>
+              <Icon name='trash'  />
+              remove
+            </span>
+          </div>
+        )
         return (
-            <div className="photo-container">
-                <div className="photo-content">
-                    <img src={url} />
-                    <div className="photo-description">
-                        <span>{description}</span>
-                        <Likes
-                          likesNumber={this.props.likes}
-                          onChange={this.addListToStore.bind(this) } 
-                        />
-                        <div>
-                          <a href="javascript:void(0)" onClick={() => this.props.onDelete(id)}> delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Card
+              image={url}
+              header={name}
+              description={description}
+              extra={extra}
+            />
         );
     }
 }
